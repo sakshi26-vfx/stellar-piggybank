@@ -1,8 +1,16 @@
-# 🐖 FutureSelf // Stellar Piggy Bank
+# 🐖 FutureSelf // Stellar Piggy Bank (Level 2 - Soroban Edition)
 
-**FutureSelf** is a premium, space-themed dark mode decentralised application (dApp) built on the **Stellar Testnet** for the Level 1 (White Belt) Stellar developer challenge. It enables users to connect their Freighter wallet, monitor their balance, set visual saving milestones, and lock XLM into a static, secure "Vault" address. 
+**FutureSelf** is a premium, space-themed dark mode decentralised application (dApp) built on the **Stellar Testnet** for the Level 2 (Soroban Smart Contracts) Stellar developer challenge. It enables users to connect their preferred wallets (via StellarWalletsKit), monitor their balances, set visual saving milestones, and lock XLM directly into a **Soroban Smart Contract Vault**.
 
-This project establishes the foundation of wallet-to-wallet transfers which can be easily refactored into advanced smart contracts (Soroban) in later levels.
+The project replaces the simple wallet-to-wallet transfer from Level 1 with full smart contract read/write invocations, utilizing the official `@stellar/stellar-sdk` to simulate, sign, and submit transactions.
+
+---
+
+## 📜 Soroban Smart Contract Details
+
+- **Testnet Contract ID**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
+- **Deployment Transaction Hash**: `1c02d50755aa272e81329305df6a022c640380260cf9785761066a24ec05020a`
+- The Rust source code for the contract is located in `contracts/vault`.
 
 ---
 
@@ -32,30 +40,30 @@ The full layout of the app:
 
 ---
 
-## 🎯 Level 1 Checklist Alignment
+## 🎯 Level 2 Checklist Alignment
 
-Our project satisfies 100% of the Level 1 White Belt checklist requirements:
+Our project satisfies the advanced Level 2 requirements:
 
 | Requirement | Implementation Detail | Status |
 | :--- | :--- | :---: |
-| **Wallet Setup** | Uses the **Stellar Testnet** and links seamlessly via the official **Freighter Extension**. | ✅ |
-| **Wallet Connection** | Includes interactive **Connect Wallet** and **Disconnect [G...Address]** buttons in the header. | ✅ |
-| **Balance Handling** | Live-fetches the user's Freighter XLM balance via the **Stellar Horizon API** and displays it clearly side-by-side with the vault balance. Contains an automatic 15-second refresh interval. | ✅ |
-| **Transaction Flow** | Build, signs, and submits standard native payment operations using the `@stellar/stellar-sdk` and `@stellar/freighter-api`. | ✅ |
-| **Transaction Feedback** | Shows interactive **Toast notifications** for loading states, success logs, and error rollbacks. Success toasts include a direct link to view the transaction hash on **StellarExpert**. | ✅ |
-| **Development Standards** | Built with Vite + React + TypeScript with strict typing, clean modular structure, and high-fidelity CSS styling. | ✅ |
-| **Testnet Faucet integration** | Features a **"Fund 10,000 XLM with Friendbot"** button directly in the UI if the connected wallet has a `0 XLM (Unfunded)` balance, allowing reviewers to test instantly. | ✅ |
+| **Multi-Wallet Support** | Integrated `@creit.tech/stellar-wallets-kit` to allow users to connect Freighter, xBull, and Albedo wallets. | ✅ |
+| **Smart Contract Deployment** | Deployed a custom Rust vault contract (`contracts/vault`) to the Soroban Testnet. | ✅ |
+| **Contract Interactions** | Submits complex smart contract transactions utilizing `simulateTransaction` to estimate fees, fetch the auth footprint, and assemble transactions safely. | ✅ |
+| **Contract Reads** | Invokes view functions (`get_balance` and `get_milestone`) live from the network to drive the UI. | ✅ |
+| **Robust Error Handling** | Displays specific toasts for user signature rejections, insufficient wallet balance (detected during simulation), and ledger execution failures. | ✅ |
+| **Status Feed & Badges** | Implemented a live `TxStatusBadge` indicating `building -> submitting -> awaiting-signature -> pending -> success` alongside an `ActivityFeed`. | ✅ |
 
 ---
 
 ## 🛠️ Tech Stack & Key Libraries
 
-- **Framework**: React 19 + TypeScript + Vite 8
+- **Framework**: React 19 + TypeScript + Vite
 - **Stellar Connection**:
-  - `@stellar/stellar-sdk` (v16.0) — for Horizon server and transaction building.
-  - `@stellar/freighter-api` (v6.0) — for Freighter extension integrations.
+  - `@stellar/stellar-sdk` (v16.0) — for Soroban contract invocation and transaction building.
+  - `@creit.tech/stellar-wallets-kit` — for seamless multi-wallet integrations.
+- **Smart Contract**: Soroban Rust SDK (`soroban-sdk` v22.0)
 - **Icons**: `lucide-react`
-- **Effects**: `canvas-confetti` (for celebrating achieved savings)
+- **Effects**: `canvas-confetti`
 
 ---
 
