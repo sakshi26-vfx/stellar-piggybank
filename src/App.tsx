@@ -12,7 +12,7 @@ import {
 } from "./lib/vaultContract";
 import { TxStatusBadge } from "./components/TxStatusBadge";
 import { ActivityFeed } from "./components/ActivityFeed";
-import { TxState } from "./lib/txStatus";
+import type { TxState } from "./lib/txStatus";
 import { TransactionBuilder, BASE_FEE, rpc, xdr } from "@stellar/stellar-sdk";
 
 interface Toast {
@@ -87,20 +87,23 @@ export default function App() {
   const connectWallet = async () => {
     setIsWalletLoading(true);
     try {
-      walletKit.setNetwork(NETWORK_PASSPHRASE);
       await walletKit.openModal({
         onWalletSelected: async (option: any) => {
           try {
-            const result = await walletKit.getPublicKey();
-            setUserAddress(result);
-            sessionStorage.setItem("stellar_connected_address", result);
-            addToast("success", "Wallet Connected", `Successfully linked: ${result.substring(0, 5)}...${result.substring(52)}`);
+            // @ts-ignore
+            walletKit.setWallet(option.id);
+            // @ts-ignore
+            const { address } = await walletKit.getAddress();
+            setUserAddress(address);
+            sessionStorage.setItem("stellar_connected_address", address);
+            addToast("success", "Wallet Connected", `Successfully linked: ${address.substring(0, 5)}...${address.substring(52)}`);
           } catch (e: any) {
             addToast("error", "Wallet Error", "No compatible wallet detected — install Freighter or xBull");
           }
         }
       });
     } catch (error: any) {
+      console.error("WALLET ERROR:", error);
       addToast("error", "Connection Error", "Failed to open wallet modal.");
     } finally {
       setIsWalletLoading(false);
@@ -112,6 +115,7 @@ export default function App() {
     setUserBalance("0.0000000");
     setVaultBalance("0.0000000");
     sessionStorage.removeItem("stellar_connected_address");
+    // @ts-ignore
     walletKit.disconnect();
     addToast("info", "Disconnected", "Your session has been closed.");
   };
@@ -145,7 +149,7 @@ export default function App() {
       }
       
       if (rpc.Api.isSimulationSuccess(simulation)) {
-        tx = rpc.assembleTransaction(tx, NETWORK_PASSPHRASE, simulation).build();
+        tx = rpc.assembleTransaction(tx, simulation).build();
       } else {
         throw new Error("Simulation didn't succeed");
       }
@@ -154,6 +158,7 @@ export default function App() {
       
       let signedXdr: string;
       try {
+        // @ts-ignore
         const result = await walletKit.signTransaction(tx.toXDR());
         signedXdr = typeof result === "string" ? result : result.signedTxXdr;
       } catch (err: any) {
@@ -167,7 +172,7 @@ export default function App() {
       const signedTx = TransactionBuilder.fromXDR(signedXdr, NETWORK_PASSPHRASE);
       const submitResponse = await rpcServer.sendTransaction(signedTx);
       
-      if (submitResponse.errorResultXdr) {
+      if (submitResponse.errorResult) {
         addToast("error", "Submission Failed", "The network rejected the transaction.");
         setTxState({ status: 'error', error: "Network rejection" });
         setTimeout(() => setTxState({ status: 'idle' }), 5000);

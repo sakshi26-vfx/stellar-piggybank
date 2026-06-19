@@ -21,7 +21,8 @@ export const horizonServer = new Horizon.Server(HORIZON_URL);
 
 
 // Dummy account for read-only simulation
-const DUMMY_ACCOUNT = new Account("GA7YBE2XEXUXD5T5RUGJ3VAKZJ4N3D5CWWK4LMMQNTZQZ3JUXZ5G3B4D", "0");
+import { Keypair } from "@stellar/stellar-sdk";
+const DUMMY_ACCOUNT = new Account(Keypair.random().publicKey(), "0");
 
 export const getVaultContract = () => {
   if (!VAULT_CONTRACT_ID) {
@@ -52,7 +53,7 @@ export const simulateReadCall = async (op: xdr.Operation) => {
     throw new Error(`Simulation failed: ${simulation.error}`);
   }
   if (rpc.Api.isSimulationSuccess(simulation)) {
-    return scValToNative(simulation.result.retval);
+    return scValToNative(simulation.result!.retval);
   }
   throw new Error("Simulation neither successful nor error");
 };

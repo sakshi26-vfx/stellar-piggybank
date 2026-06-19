@@ -11,7 +11,7 @@
     "demo": "node scripts/auto_demo.js"
   },
   "dependencies": {
-    "@creit.tech/stellar-wallets-kit": "^2.3.0",
+    "@creit.tech/stellar-wallets-kit": "^1.9.5",
     "@stellar/freighter-api": "^6.0.1",
     "@stellar/stellar-sdk": "^16.0.0",
     "canvas-confetti": "^1.9.4",

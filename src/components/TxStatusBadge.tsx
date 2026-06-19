@@ -1,5 +1,5 @@
 import React from 'react';
-import { TxState } from '../lib/txStatus';
+import type { TxState } from '../lib/txStatus';
 import { Loader2, CheckCircle2, AlertCircle, Clock } from 'lucide-react';
 
 interface Props {

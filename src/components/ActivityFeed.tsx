@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { rpcServer, VAULT_CONTRACT_ID, stroopsToXlm } from '../lib/vaultContract';
-import { History, ExternalLink } from 'lucide-react';
+import { History } from 'lucide-react';
 import { scValToNative } from '@stellar/stellar-sdk';
 
 interface VaultEvent {

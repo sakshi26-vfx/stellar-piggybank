@@ -10,13 +10,14 @@ The project replaces the simple wallet-to-wallet transfer from Level 1 with full
 
 - **Testnet Contract ID**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
 - **Deployment Transaction Hash**: `1c02d50755aa272e81329305df6a022c640380260cf9785761066a24ec05020a`
+- **Milestone Interaction Transaction Hash**: `a34817cb3acfabc337021034801180340cd21169c46c3821bd9f85bca0889b03`
 - The Rust source code for the contract is located in `contracts/vault`.
 
 ---
 
 ## 📸 Interface Preview & Screenshots
 
-To satisfy the Level 1 challenge review requirements, here is the complete visual walkthrough of the application states:
+To satisfy the challenge review requirements, here is the complete visual walkthrough of the application states:
 
 ### 1. Wallet Connected State & Balance Displayed
 When a user connects their Freighter Wallet, the dApp queries the Stellar Horizon API to load and display their live testnet XLM balance alongside the target saving milestone.
@@ -34,7 +35,11 @@ Once signed, the transaction is submitted to the Stellar Testnet. Upon success, 
 If the Freighter wallet is not connected, the app provides clean call-to-actions to prompt the user to link their wallet.
 ![Unconnected State](./screenshots/connecting_wallet.png)
 
-### 5. Full Browser Dashboard view
+### 5. Multi-Wallet Options Modal
+When a user clicks "Connect Wallet", the StellarWalletsKit modal opens, allowing them to choose from available Stellar wallets such as Freighter, Albedo, and xBull.
+![Multi-Wallet Connection Modal](./screenshots/wallet_options.png)
+
+### 6. Full Browser Dashboard view
 The full layout of the app:
 ![Full App view](./screenshots/dashboard_full.png)
 
