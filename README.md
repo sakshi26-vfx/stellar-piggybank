@@ -14,6 +14,42 @@ Deployed on **Vercel** under the `sakshi26-vfx` account. No installation require
 
 ---
 
+## 🚦 Project Evolution — Level 1 → Level 2
+
+### ⚪ Level 1 — White Belt (What we started with)
+
+The first version of **FutureSelf** was a basic Stellar dApp demonstrating wallet connectivity and simple peer-to-peer transfers:
+
+| Feature | Implementation |
+| :--- | :--- |
+| **Wallet Connection** | Single wallet only — Freighter browser extension via `@stellar/freighter-api` (`isConnected`, `requestAccess`, `signTransaction`) |
+| **Balance Display** | Fetched live XLM balance from Stellar Horizon API |
+| **Transaction** | Simple `Payment` operation — sent XLM directly from user wallet to a static vault public key |
+| **Vault** | Not a smart contract — just a hardcoded public key (`VAULT_PUBLIC_KEY`) in `src/vault.ts` |
+| **UI Feedback** | Basic success/error toast on transaction completion |
+| **Event History** | Local-only deposit history stored in `localStorage` |
+| **Error Handling** | Single generic error handler |
+
+---
+
+### 🟡 Level 2 — Yellow Belt (What we built on top)
+
+The second version completely replaces and upgrades every Layer-1 component with a full Soroban smart contract integration:
+
+| What Changed | Level 1 | Level 2 Upgrade |
+| :--- | :--- | :--- |
+| **Wallet Support** | Freighter only | **3 wallets** — Freighter, xBull & Albedo via `@creit.tech/stellar-wallets-kit` multi-wallet modal |
+| **Transaction Type** | Simple `Payment` op | **Smart contract invocation** — `deposit()`, `withdraw()`, `set_milestone()` via Soroban RPC |
+| **Vault** | Static public key | **Deployed Soroban Rust contract** (`CAGXMPDMI5...`) with `deposit`, `withdraw`, `get_balance`, `set_milestone`, `get_milestone` functions |
+| **Contract Reads** | None | Live `get_balance()` and `get_milestone()` calls drive the UI in real-time |
+| **Error Handling** | 1 generic error | **3 specific error types** — Signature rejected, Insufficient balance (pre-flight), Ledger execution failure |
+| **Transaction Status** | Simple loading spinner | **Full lifecycle badge** — `building → submitting → awaiting-signature → pending → success/fail` |
+| **Event Feed** | localStorage history | **Live on-chain event polling** via `getEvents()` — streams real-time `deposit`, `withdraw`, `milestone` events |
+| **Savings Goal** | UI-only slider | **On-chain milestone** — saved and read from the smart contract via `set_milestone()` / `get_milestone()` |
+| **Error Simulation** | None | Pre-flight `simulateTransaction()` detects insufficient balance before submission |
+
+---
+
 ## 📜 Soroban Smart Contract Details
 
 - **Testnet Contract ID**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
