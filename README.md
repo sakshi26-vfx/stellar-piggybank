@@ -66,9 +66,21 @@ Our project satisfies the advanced Level 2 requirements:
 - **Stellar Connection**:
   - `@stellar/stellar-sdk` (v16.0) — for Soroban contract invocation and transaction building.
   - `@creit.tech/stellar-wallets-kit` — for seamless multi-wallet integrations.
+  - `@stellar/freighter-api` (v6.0) — for direct Freighter wallet operations.
 - **Smart Contract**: Soroban Rust SDK (`soroban-sdk` v22.0)
 - **Icons**: `lucide-react`
 - **Effects**: `canvas-confetti`
+
+---
+
+## 💡 Level 1 Step 3 - Freighter Wallet API Support (Mentor Review)
+
+To address the mentor feedback regarding Freighter API imports and implementation completeness inside the judged files, all connection, permissioning, and transaction signing routines have been consolidated directly inside the main judged file [App.tsx](file:///d:/stellar.piggybank%20sakshi/src/App.tsx):
+
+- **Permission Check & Request**: Implemented via `isAllowed()` check and `setAllowed()` call inside the `requestFreighterAccessDirect` helper function.
+- **Wallet Connection & Public Key Retrieval**: Implemented via the `requestAccess()` call inside the `requestFreighterAccessDirect` helper function.
+- **Transaction Signing Flow**: Implemented via `signTransaction()` (aliased as `signWithFreighterDirect`) inside `src/App.tsx` and actively executed when the Freighter wallet option is selected.
+- **Omitted Vault Helper Fix**: All contract helper functions, custom status badges, and feeds are fully inlined directly in `src/App.tsx`, providing the mentors with 100% visibility of the complete transaction building, simulation, signing, and submission flow in a single file.
 
 ---
 
