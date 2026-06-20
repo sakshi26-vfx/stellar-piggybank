@@ -6,6 +6,14 @@ The project replaces the simple wallet-to-wallet transfer from Level 1 with full
 
 ---
 
+## 🌐 Live Demo
+
+> ✨ **[https://stellar-piggybank-sakshi-nu.vercel.app](https://stellar-piggybank-sakshi-nu.vercel.app)**
+
+Deployed on **Vercel** under the `sakshi26-vfx` account. No installation required — connect your Freighter/xBull/Albedo wallet and start saving on-chain!
+
+---
+
 ## 📜 Soroban Smart Contract Details
 
 - **Testnet Contract ID**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
