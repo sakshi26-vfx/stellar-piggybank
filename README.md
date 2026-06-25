@@ -16,7 +16,7 @@ Deployed on **Vercel** under the `sakshi26-vfx` account. No installation require
 
 ## 🚦 Project Evolution — Level 1 → Level 2
 
-### ⚪ Level 1 — White Belt (What we started with)
+### ⚪ Level 1 — White Belt (What I started with)
 
 The first version of **FutureSelf** was a basic Stellar dApp demonstrating wallet connectivity and simple peer-to-peer transfers:
 
@@ -32,7 +32,7 @@ The first version of **FutureSelf** was a basic Stellar dApp demonstrating walle
 
 ---
 
-### 🟡 Level 2 — Yellow Belt (What we built on top)
+### 🟡 Level 2 — Yellow Belt (What I built on top)
 
 The second version completely replaces and upgrades every Layer-1 component with a full Soroban smart contract integration:
 
@@ -91,7 +91,7 @@ The full layout of the app:
 
 ## 🎯 Level 2 Checklist Alignment
 
-Our project satisfies the advanced Level 2 requirements:
+My project satisfies the advanced Level 2 requirements:
 
 | Requirement | Implementation Detail | Status |
 | :--- | :--- | :---: |

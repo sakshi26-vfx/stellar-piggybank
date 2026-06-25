@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "sakshi26-vfx",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

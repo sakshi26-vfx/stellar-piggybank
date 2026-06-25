@@ -2,6 +2,7 @@
 name = "future-self-vault"
 version = "0.1.0"
 edition = "2021"
+authors = ["sakshi26-vfx"]
 
 [lib]
 crate-type = ["cdylib"]
