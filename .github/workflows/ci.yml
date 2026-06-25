@@ -1,0 +1,46 @@
+name: FutureSelf CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  rust-tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+        targets: wasm32-unknown-unknown
+
+    - name: Run Cargo Tests
+      run: |
+        cd contracts/vault
+        cargo test
+
+    - name: Build Contracts
+      run: |
+        cd contracts/vault
+        cargo build --target wasm32-unknown-unknown --release
+
+  frontend-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'npm'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Frontend
+      run: npm run build
