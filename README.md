@@ -87,6 +87,26 @@ When a user clicks "Connect Wallet", the StellarWalletsKit modal opens, allowing
 The full layout of the app:
 ![Full App view](./screenshots/dashboard_full.png)
 
+### 7. Mobile Responsive UI
+The application interface is fully responsive, fitting mobile device screens seamlessly:
+![Mobile Responsive UI](./screenshots/mobile_ui.png)
+
+### 8. CI/CD Pipeline Configuration
+Automatic validation pipeline runs tests and checks build correctness on GitHub Actions:
+![CI/CD Pipeline](./screenshots/cicd_pipeline.png)
+
+### 9. Smart Contract Unit Tests (4 Passing Tests)
+Rust Cargo unit tests validating all vault contract scenarios and error outcomes:
+![Unit Test Results](./screenshots/test_output.png)
+
+---
+
+## 🎥 Interactive Demo Video
+
+Below is the complete interactive session walkthrough recording of the application flow:
+
+![FutureSelf Walkthrough Demo](./screenshots/demo_walkthrough.webp)
+
 ---
 
 ## 🎯 Level 2 Checklist Alignment
