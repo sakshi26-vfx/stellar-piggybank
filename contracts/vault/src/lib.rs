@@ -166,4 +166,62 @@ mod test {
         assert_eq!(token_client.balance(&contract_id), 250);
         assert_eq!(client.get_balance(&user), 250);
     }
+
+    #[test]
+    fn test_vault_already_initialized() {
+        let env = Env::default();
+        let contract_id = env.register_contract(None, FutureSelfVault);
+        let client = FutureSelfVaultClient::new(&env, &contract_id);
+        let admin = Address::generate(&env);
+        let token_admin = env.register_stellar_asset_contract(admin.clone());
+
+        client.initialize(&token_admin);
+        let res = client.try_initialize(&token_admin);
+        assert!(res.is_err());
+    }
+
+    #[test]
+    fn test_vault_insufficient_balance() {
+        let env = Env::default();
+        env.mock_all_auths();
+        let contract_id = env.register_contract(None, FutureSelfVault);
+        let client = FutureSelfVaultClient::new(&env, &contract_id);
+        let admin = Address::generate(&env);
+        let user = Address::generate(&env);
+        let token_admin = env.register_stellar_asset_contract(admin.clone());
+        let token_admin_client = token::StellarAssetClient::new(&env, &token_admin);
+
+        client.initialize(&token_admin);
+        token_admin_client.mint(&user, &1000);
+
+        client.deposit(&user, &400);
+        let res = client.try_withdraw(&user, &500);
+        assert!(res.is_err());
+    }
+
+    #[test]
+    fn test_vault_invalid_amount() {
+        let env = Env::default();
+        env.mock_all_auths();
+        let contract_id = env.register_contract(None, FutureSelfVault);
+        let client = FutureSelfVaultClient::new(&env, &contract_id);
+        let admin = Address::generate(&env);
+        let user = Address::generate(&env);
+        let token_admin = env.register_stellar_asset_contract(admin.clone());
+        let token_admin_client = token::StellarAssetClient::new(&env, &token_admin);
+
+        client.initialize(&token_admin);
+        token_admin_client.mint(&user, &1000);
+
+        // Try zero/negative deposit
+        assert!(client.try_deposit(&user, &0).is_err());
+        assert!(client.try_deposit(&user, &-50).is_err());
+
+        // Try zero/negative withdraw
+        assert!(client.try_withdraw(&user, &0).is_err());
+        assert!(client.try_withdraw(&user, &-50).is_err());
+
+        // Try negative milestone
+        assert!(client.try_set_milestone(&user, &-1).is_err());
+    }
 }
