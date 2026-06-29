@@ -6,9 +6,14 @@ The project replaces the simple wallet-to-wallet transfer from Level 1 with full
 
 ---
 
-## 🌐 Live Demo
+## 🌐 Live Demo & On-Chain Proof
 
-> ✨ **[https://stellar-piggybank-sakshi-nu.vercel.app](https://stellar-piggybank-sakshi-nu.vercel.app)**
+> [!IMPORTANT]
+> 🔗 **Deployed Contract Address (Stellar Testnet)**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
+> 
+> 🌐 **StellarExpert Explorer Verification Link**: [https://stellar.expert/explorer/testnet/contract/CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC](https://stellar.expert/explorer/testnet/contract/CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC)
+> 
+> ✨ **Live Web Application**: [https://stellar-piggybank-sakshi-nu.vercel.app](https://stellar-piggybank-sakshi-nu.vercel.app)
 
 Deployed on **Vercel** under the `sakshi26-vfx` account. No installation required — connect your Freighter/xBull/Albedo wallet and start saving on-chain!
 
@@ -50,12 +55,20 @@ The second version completely replaces and upgrades every Layer-1 component with
 
 ---
 
-## 📜 Soroban Smart Contract Details
+## 📜 Soroban Smart Contract Details & Proof of Deployment
 
-- **Testnet Contract ID**: `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`
-- **Deployment Transaction Hash**: `1c02d50755aa272e81329305df6a022c640380260cf9785761066a24ec05020a`
-- **Milestone Interaction Transaction Hash**: `a34817cb3acfabc337021034801180340cd21169c46c3821bd9f85bca0889b03`
+Below are the direct StellarExpert Explorer links verifying the smart contract deployment and on-chain interactions on Stellar Testnet:
+
+| On-Chain Proof Item | Identifier / Hash | Explorer Verification Link |
+| :--- | :--- | :--- |
+| **Deployed Soroban Contract** | `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC` | 🔗 [View Contract on StellarExpert](https://stellar.expert/explorer/testnet/contract/CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC) |
+| **Deployment Transaction Hash** | `1c02d50755aa272e81329305df6a022c640380260cf9785761066a24ec05020a` | 🔗 [View Deployment Tx on StellarExpert](https://stellar.expert/explorer/testnet/tx/1c02d50755aa272e81329305df6a022c640380260cf9785761066a24ec05020a) |
+| **Milestone Interaction Tx Hash** | `a34817cb3acfabc337021034801180340cd21169c46c3821bd9f85bca0889b03` | 🔗 [View Interaction Tx on StellarExpert](https://stellar.expert/explorer/testnet/tx/a34817cb3acfabc337021034801180340cd21169c46c3821bd9f85bca0889b03) |
+
 - The Rust source code for the contract is located in `contracts/vault`.
+
+### 🔍 Live Deployed Contract on Stellar Testnet Explorer
+![Deployed Soroban Contract on Stellar Testnet Explorer](./screenshots/deployed_contract_testnet.png)
 
 ---
 
@@ -99,6 +112,10 @@ Automatic validation pipeline runs tests and checks build correctness on GitHub 
 Rust Cargo unit tests validating all vault contract scenarios and error outcomes:
 ![Unit Test Results](./screenshots/test_output.png)
 
+### 10. Deployed Soroban Smart Contract on Stellar Testnet Explorer
+Verified live Soroban Smart Contract overview page on StellarExpert Testnet Explorer showing contract hash `CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC`:
+![Deployed Contract Testnet Explorer](./screenshots/deployed_contract_testnet.png)
+
 ---
 
 ## 🎥 Interactive Demo Video
@@ -116,7 +133,7 @@ My project satisfies the advanced Level 2 requirements:
 | Requirement | Implementation Detail | Status |
 | :--- | :--- | :---: |
 | **Multi-Wallet Support** | Integrated `@creit.tech/stellar-wallets-kit` to allow users to connect Freighter, xBull, and Albedo wallets. | ✅ |
-| **Smart Contract Deployment** | Deployed a custom Rust vault contract (`contracts/vault`) to the Soroban Testnet. | ✅ |
+| **Smart Contract Deployment** | Deployed a custom Rust vault contract (`contracts/vault`) to the Soroban Testnet. Proof: [`CAGXMP...SKC`](https://stellar.expert/explorer/testnet/contract/CAGXMPDMI5RY27OREPRV2IAWLT3S432ACKC74LNXWXSLEV6RJ3DODSKC). | ✅ |
 | **Contract Interactions** | Submits complex smart contract transactions utilizing `simulateTransaction` to estimate fees, fetch the auth footprint, and assemble transactions safely. | ✅ |
 | **Contract Reads** | Invokes view functions (`get_balance` and `get_milestone`) live from the network to drive the UI. | ✅ |
 | **Robust Error Handling** | Displays specific toasts for user signature rejections, insufficient wallet balance (detected during simulation), and ledger execution failures. | ✅ |
